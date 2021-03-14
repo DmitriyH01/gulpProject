@@ -29,7 +29,13 @@ function scripts() {
 
 function build() {
   return src(
-    ["app/css/main.css", "app/fonts/**/*", "app/js/main.min.js", "app/*.html"],
+    [
+      "app/css/main.css",
+      "app/fonts/**/*",
+      "app/js/main.min.js",
+      "app/*.html",
+      "app/images/*",
+    ],
     { base: "app" }
   ).pipe(dest("dist"));
 }
