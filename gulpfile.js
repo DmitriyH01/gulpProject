@@ -58,3 +58,6 @@ exports.cleanDist = cleanDist;
 
 exports.build = series(cleanDist, build);
 exports.default = parallel(convertsToCss, scripts, browsersync, watching);
+
+// use "gulp" for start
+// use "gulp build" for compare project into "dist" folder
