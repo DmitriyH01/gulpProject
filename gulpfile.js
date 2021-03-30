@@ -3,6 +3,7 @@ const browserSync = require("browser-sync").create();
 const concat = require("gulp-concat");
 const uglifyEs = require("gulp-uglify-es").default;
 const autoprefixer = require("gulp-autoprefixer");
+const cleanCSS = require("gulp-clean-css");
 const del = require("del");
 const { src, dest, watch, parallel, series } = require("gulp");
 
@@ -14,14 +15,16 @@ function convertsToCss() {
   return src("app/scss/main.scss")
     .pipe(scss({ outputStyle: "expanded" }))
     .pipe(
-      autoprefixer({ overrideBrowserslist: ["last 10 versions"], grid: true })
+      autoprefixer({ overrideBrowserslist: ["last 5 versions"], grid: true })
     )
+    .pipe(cleanCSS({ compatibility: "ie8" }))
     .pipe(dest("app/css"))
     .pipe(browserSync.stream());
 }
 
 function scripts() {
   return src("app/js/main.js")
+    .pipe(uglifyEs())
     .pipe(concat("main.min.js"))
     .pipe(dest("app/js"))
     .pipe(browserSync.stream());
